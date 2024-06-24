@@ -1,0 +1,427 @@
+/* Reset and basic styles */
+body {
+    font-family: 'Roboto', sans-serif; /* Applique Roboto comme police principale */
+    font-size: 16px; /* Taille de police de base */
+    line-height: 1.5; /* Espacement des lignes pour une meilleure lisibilité */
+    margin: 0;
+    padding: 0;
+    color: #fff;
+ 
+}
+
+/* Main HUD container */
+#vehicle-hud {
+    position: fixed;
+    bottom: 20px;
+    right: 50%; /* Center horizontally */
+    transform: translateX(-50%);
+    display: none; /* Hidden by default */
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    z-index: 1000;
+    width: 340px;
+    max-width: 90%;
+    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+    border-radius: 20px;
+    padding: 14px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+}
+
+/* Container for icons */
+.icons-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow icons to wrap if needed */
+    justify-content: center;
+    gap: 12px;
+}
+
+/* Styles pour les icônes dans les informations principales */
+.icon {
+    width: 32px; /* Taille réduite des icônes */
+    height: 32px; /* Taille réduite des icônes */
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon i {
+    font-size: 14px; /* Taille de l'icône réduite */
+}
+
+.icon.active {
+    background-color: #4CAF50; /* Active state background color */
+    color: #fff; /* Active state icon color */
+}
+
+/* Specific styling for the passengers icon */
+#passengers {
+    position: relative;
+}
+
+#passenger-count {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background-color: #FF4136; /* Red background */
+    color: #fff; /* Text color */
+    font-size: 10px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Container for main HUD elements */
+.hud-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* Container for speed information */
+.speed-container {
+    position: relative;
+    width: 130px;
+    height: 130px;
+}
+
+/* Styling for speed circle */
+.speed-circle {
+    transform: rotate(-90deg);
+    width: 100%;
+    height: 100%;
+}
+
+.speed-background {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.2); /* Background circle color */
+    stroke-width: 8;
+}
+
+.speed-progress {
+    fill: none;
+    stroke: #4CAF50; /* Color of the speed progress */
+    stroke-width: 8;
+    stroke-linecap: round;
+    stroke-dasharray: 283; /* Circumference of the circle */
+    stroke-dashoffset: 283; /* Hide initially */
+    transition: stroke-dashoffset 0.3s ease; /* Animation */
+}
+
+.speed-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #fff;
+}
+
+#speed-value {
+    font-size: 28px; /* Speed value font size */
+    font-weight: bold;
+}
+
+#speed-unit {
+    font-size: 12px; /* Unit (km/h) font size */
+    opacity: 0.7;
+}
+
+.info-container {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 5px; /* Espacement entre les lignes et colonnes */
+    grid-column-gap: 30px; /* Espacement accru entre les icônes et les informations */
+    margin-left: 20px; /* Décalage vers la droite */
+    margin-top: 6px; /* Réduit la marge supérieure */
+    margin-bottom:  6px; /* Réduit la marge inférieure */
+    padding:  2px; /* Réduit le padding intérieur */
+}
+
+
+.info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; /* Réduit l'espacement vertical entre les éléments */
+}
+
+.info-label {
+    font-size: 14px;
+    opacity: 0.8;
+    margin-right: 10px; /* Réduit l'espacement à droite des libellés */
+}
+
+.info-value {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+
+
+/* Style spécifique pour l'icône de la station essence */
+.fuel-icon {
+    width: 28px; /* Taille réduite de l'icône de la station essence */
+    height: 28px; /* Taille réduite de l'icône de la station essence */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#fuel-icon-inner {
+    font-size: 24px; /* Adjust icon size */
+    color: #4CAF50; /* Default color for full fuel */
+}
+
+/* Fuel icon color variations */
+.fuel-50 {
+    color: #FFA500; /* Orange */
+}
+
+.fuel-10 {
+    color: #FF4136; /* Red */
+}
+
+.fuel-0 {
+    color: #000; /* Black */
+}
+
+/* RPM icon bar styling */
+.rpm-bar {
+    width: calc(100% - 45px); /* Adjust width as needed */
+    height: 10px;
+    background-color: transparent !important; /* Assurez-vous que le fond est transparent */
+    width: 32px; /* Ajustement de la largeur */
+    height: 32px; /* Ajustement de la hauteur */
+    border-radius: 2px;
+    overflow: hidden;
+}
+#rpm-icon {
+    background-color: transparent !important; /* Assurez-vous que le fond est transparent */
+    width: 36px; /* Ajustement de la largeur */
+    height: 36px; /* Ajustement de la hauteur */
+}
+
+#rpm-icon i {
+    font-size: 24px; /* Ajustement de la taille de l'icône */
+}
+#rpm-fill {
+    height: 100%;
+    width: 0%;
+    transition: width 0.3s ease-in-out;
+    background-color: #FF4136
+    /* Default color for high RPM */
+}
+
+/* RPM color variations */
+.rpm-bar.low #rpm-fill {
+    background-color: #4CAF50; /* Green for low RPM */
+}
+
+.rpm-bar.medium #rpm-fill {
+    background-color: #FFA500; /* Orange for medium RPM */
+}
+
+/* Temperature icon bar styling */
+.temp-bar {
+    width: calc(100% - 45px); /* Adjust width as needed */
+    height: 10px;
+    background-color: rgba(255, 255, 255, 0.1); /* Background color */
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+#temp-fill {
+    height: 100%;
+    width: 0%;
+    transition: width 0.3s ease-in-out;
+    background-color: #FFA500; /* Default color for medium temperature */
+}
+
+/* Temperature color variations */
+.temp-bar.high #temp-fill {
+    background-color: #FF4136; /* Red for high temperature */
+}
+
+.temp-bar.low #temp-fill {
+    background-color: #4CAF50; /* Green for low temperature */
+}
+
+/* Vehicle state icon styling */
+#vehicle-state-icon {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: transparent !important;
+    transition: all 0.3s ease;
+}
+
+#vehicle-state-icon i {
+    font-size: 24px; /* Adjust icon size */
+}
+
+#vehicle-state-icon.active {
+    background-color: #4CAF50; /* Green for good vehicle state */
+}
+
+#vehicle-state-icon.inactive {
+    background-color: #FF4136; /* Red for poor vehicle state */
+}
+
+/* Night mode */
+.night-mode {
+    filter: brightness(0.7) sepia(0.2); /* Adjust brightness and sepia effect */
+}
+
+/* Alerts container */
+#alerts-container {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Lock status icon */
+#lock-status {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1); /* Default background color */
+    transition: all 0.3s ease;
+}
+
+#lock-status i {
+    font-size: 16px; /* Adjust icon size */
+}
+
+#lock-status.active {
+    background-color: #4CAF50; /* Green for locked status */
+}
+
+#lock-status.inactive {
+    background-color: #FF4136; /* Red for unlocked status */
+}
+/* Style spécifique pour l'icône de lock/unlock */
+#lock-status.icon {
+    width: 32px; /* Ajustement de la largeur de l'icône */
+    height: 32px; /* Ajustement de la hauteur de l'icône */
+}
+
+#lock-status.icon i {
+    font-size: 14px; /* Ajustement de la taille de l'icône */
+}
+/* Style spécifique pour l'icône du statut de la voiture */
+#vehicle-state-icon.icon {
+    width: 32px; /* Ajustement de la largeur de l'icône */
+    height: 32px; /* Ajustement de la hauteur de l'icône */
+}
+
+#vehicle-state-icon.icon i {
+    font-size: 18px; /* Ajustement de la taille de l'icône */
+}
+/* Style spécifique pour l'icône de l'essence */
+#fuel-icon-inner {
+    font-size: 24px; /* Taille de l'icône de l'essence */
+}
+#temp-icon {
+    background-color: transparent !important; /* Assurez-vous que le fond est transparent */
+    width: 32px; /* Ajustement de la largeur */
+    height: 32px; /* Ajustement de la hauteur */
+}
+
+#temp-icon i {
+    font-size: 18px; /* Ajustement de la taille de l'icône */
+}#vehicle-state-icon i {
+    transition: color 0.3s ease;
+}
+
+@keyframes gearChange {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+#gear-value {
+    font-size: 24px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+#gear-value.gear-change {
+    animation: gearChange 0.3s ease;
+}
+
+/* Ajout de couleurs différentes selon le rapport */
+#gear-value[data-gear="reverse"] {
+    color: #ffffff; /* Rouge pour la marche arrière */
+}
+
+#gear-value[data-gear="low"] {
+    color: #ffffff; /* Orange pour le premier rapport */
+}
+
+#gear-value[data-gear="medium"] {
+    color: #ffffff; /* Jaune pour les rapports moyens */
+}
+
+#gear-value[data-gear="high"] {
+    color: #ffffff; /* Vert pour les rapports élevés */
+}
+@keyframes speedChange {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+#speed-value {
+    font-size: 28px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+#speed-value.speed-change {
+    animation: speedChange 0.3s ease;
+}
+
+/* Ajout de couleurs différentes selon la vitesse */
+#speed-value[data-speed="0"] {
+    color: #ffffff; /* Vert pour vitesse nulle */
+}
+
+#speed-value[data-speed="low"] {
+    color: #ffffff; /* Orange pour vitesse basse */
+}
+
+#speed-value[data-speed="medium"] {
+    color: #ffffff; /* Orange foncé pour vitesse moyenne */
+}
+
+#speed-value[data-speed="high"] {
+    color: #ffffff; /* Rouge pour vitesse élevée */
+}
+ 
